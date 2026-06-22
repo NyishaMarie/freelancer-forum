@@ -60,3 +60,8 @@ const freelancers = Array.from({ length: NUM_FREELANCERS}, makeFreelancer);
 
 //QUESTION #3
 
+function getAverageRate() {
+    const total = freelancers.reduce((sum, f) => sum + f.rate,0);
+
+    return total / freelancers.length;
+}
