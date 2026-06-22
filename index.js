@@ -86,8 +86,17 @@ function FreelancerRow(freelancer) {
 // QUESTION #6 (function: array of freelancers)
 
 function FreelancerRows() {
-    const $tbody = document.createElement("tableBody")
+    const $tbody = document.createElement("tableBody");
     $tbody.replaceChildren(...freelancers.map(FreelancerRow));
 
     return $tbody;
+}
+
+// QUESTION 7 function: average rate
+
+function AverageRate() {
+    const $p = document.createElement("p");
+    $p.textContent = `The average rate is $${averageRate.toFixed(2)}.`;
+
+    return $p;
 }
