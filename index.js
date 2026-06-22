@@ -11,35 +11,6 @@ const OCCUPATIONS = ["Writer", "Teacher", "Programmer", "Designer", "Engineer"];
 const PRICE_RANGE = { min: 20, max: 200 };
 const NUM_FREELANCERS = 100;
 
-// RENDERING part so I can visualize my code
-
-function render() {
-  const $app = document.querySelector("#app");
-$app.innerHTML = `
-    <h1>Freelancer Forum</h1>
-    <AverageRate></AverageRate>
-    <table>
-      <thead>
-        <tr>
-          <th>Name</th>
-          <th>Occupation</th>
-          <th>Rate</th>
-        </tr>
-      </thead>
-      <tbody id="FreelancerRows"></tbody>
-    </table>
-  `;
-  $app.querySelector("AverageRate").replaceWith(AverageRate());
-  $app.querySelector("#FreelancerRows").replaceWith(FreelancerRows());
-}
-
-render();
-
-
-
-function random(array) {
-    return array[Math.floor(Math.random() * array.length)];
-}
 
 
 // QUESTION #1
@@ -61,7 +32,7 @@ const freelancers = Array.from({ length: NUM_FREELANCERS}, makeFreelancer);
 //QUESTION #3 (function: returns average rate of all freelancers)
 
 function getAverageRate() {
-    const total = freelancers.reduce((sum, f) => sum + f.rate,0);
+    const total = freelancers.reduce((total, freelancer) => total + freelancer.rate,0);
 
     return total / freelancers.length;
 }
@@ -72,12 +43,12 @@ const averageRate = getAverageRate();
 
 // QUESTION #5 (function: single freelancer)
 
-function FreelancerRow(freelancer) {
-    const $tr = document.createElement("tableRow");
+function FreelancerRow({name, occupation, rate}) {
+    const $tr = document.createElement("tr");
     $tr.innerHTML= `
-        <td>${freelancer.name}</td>
-        <td>${freelancer.occupation}</td>
-        <td>${freelancer.rate}</td>
+        <td>${name}</td>
+        <td>${occupation}</td>
+        <td>$${rate}</td>
     `;
 
     return $tr;
@@ -86,7 +57,7 @@ function FreelancerRow(freelancer) {
 // QUESTION #6 (function: array of freelancers)
 
 function FreelancerRows() {
-    const $tbody = document.createElement("tableBody");
+    const $tbody = document.createElement("tbody");
     $tbody.replaceChildren(...freelancers.map(FreelancerRow));
 
     return $tbody;
@@ -99,4 +70,35 @@ function AverageRate() {
     $p.textContent = `The average rate is $${averageRate.toFixed(2)}.`;
 
     return $p;
+}
+
+// RENDERING part so I can visualize my code
+
+function render() {
+    const $app = document.querySelector("#app");
+
+$app.innerHTML = `
+    <h1>Freelancer Forum</h1>
+    <AverageRate></AverageRate>
+    <table>
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Occupation</th>
+                <th>Rate</th>
+            </tr>
+        </thead>
+    <tbody id="FreelancerRows"></tbody>
+    </table>
+  `;
+  $app.querySelector("AverageRate").replaceWith(AverageRate());
+  $app.querySelector("#FreelancerRows").replaceWith(FreelancerRows());
+}
+
+render();
+
+
+
+function random(array) {
+    return array[Math.floor(Math.random() * array.length)];
 }
