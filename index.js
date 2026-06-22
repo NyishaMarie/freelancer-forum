@@ -65,3 +65,7 @@ function getAverageRate() {
 
     return total / freelancers.length;
 }
+
+// QUESTION #4
+
+const averageRate = getAverageRate();
