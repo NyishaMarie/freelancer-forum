@@ -69,3 +69,17 @@ function getAverageRate() {
 // QUESTION #4
 
 const averageRate = getAverageRate();
+
+// QUESTION #5
+
+function FreelancerRow(freelancer) {
+    const $tr = document.createElement("tableRow");
+    $tr.innerHTML= `
+        <td>${freelancer.name}</td>
+        <td>${freelancer.occupation}</td>
+        <td>${freelancer.rate}</td>
+    `;
+    return $tr;
+}
+
+// QUESTION #6
