@@ -54,11 +54,11 @@ function makeFreelancer() {
     return {name, occupation, rate};
 }
 
-// QUESTION #2
+// QUESTION #2 
 
 const freelancers = Array.from({ length: NUM_FREELANCERS}, makeFreelancer);
 
-//QUESTION #3
+//QUESTION #3 (function: returns average rate of all freelancers)
 
 function getAverageRate() {
     const total = freelancers.reduce((sum, f) => sum + f.rate,0);
@@ -66,11 +66,11 @@ function getAverageRate() {
     return total / freelancers.length;
 }
 
-// QUESTION #4
+// QUESTION #4 (function: average rate of all freelancers)
 
 const averageRate = getAverageRate();
 
-// QUESTION #5
+// QUESTION #5 (function: single freelancer)
 
 function FreelancerRow(freelancer) {
     const $tr = document.createElement("tableRow");
@@ -79,7 +79,15 @@ function FreelancerRow(freelancer) {
         <td>${freelancer.occupation}</td>
         <td>${freelancer.rate}</td>
     `;
+
     return $tr;
 }
 
-// QUESTION #6
+// QUESTION #6 (function: array of freelancers)
+
+function FreelancerRows() {
+    const $tbody = document.createElement("tableBody")
+    $tbody.replaceChildren(...freelancers.map(FreelancerRow));
+
+    return $tbody;
+}
